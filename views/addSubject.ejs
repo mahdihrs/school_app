@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Subject</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h2>Add Subject to Student</h2>
+    <h4>Choose Subject</h4>
+    <form action="/students/<%= student.id %>/add-subject" method="POST">
+        First Name: <br>
+        <input type="text" value="<%= student.first_name %>" name="first_name"> <br>
+        <br>
+        Last Name: <br>
+        <input type="text" value="<%= student.last_name %>" name="last_name"> <br>
+        <br>
+        Email: <br>
+        <input type="text" value="<%= student.email %>" name="email"><br>
+        <br>
+        <select name="subject">
+            <option selected> SELECT </option>
+            <% subjects.forEach(s => { %>
+                <option value="<%= s.subject_name %>"> <%= s.subject_name %> </option>
+            <% }) %>
+        </select> <br>
+        <br>
+        <button type="submit">Add Subject</button>
+    </form>
+</body>
+</html>

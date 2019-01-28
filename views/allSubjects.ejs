@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Semua Subjects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <h5><a href="/">HOME</a></h5>
+    <h1 style="text-align: center">Subjects Data</h1>
+    <h5 style="text-align: center"><a href="/subjects/add">add subject</a></h5>
+    <table style="width:50%" border=1>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject Name</th>
+                <th>Teacher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% subjects.forEach(s => { %>
+            <tr>
+                <td>
+                    <%= s.id %>
+                </td>
+                <td>
+                    <%= s.subject_name %>
+                </td>
+                <% if(s.dataValues.Teachers.length === 0) { %>
+                <td>No teacher assigned on this subject</td>
+                <% } else { %>
+                <td>
+                    <ol>
+                        <% s.dataValues.Teachers.forEach((tchr, index) => { %>
+                        <li>
+                            <%= `${tchr.first_name} ${tchr.last_name}` %>
+                        </li>
+                        <% }) %>
+                    </ol>
+                </td>
+                <% } %>
+                <td> <a href="/subjects/<%= s.id %>/enrolled-students">Enrolled Students</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+
+</html>

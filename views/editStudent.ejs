@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Form Edit Data Student</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>  
+    <h1 style="text-align: center">Edit Students Data</h1>
+    <h5 style="text-align: center"><a href="/students">show all data</a></h5>
+    <form action="/students/edit/<%= student.id %>" method="POST">
+        <div class="container">
+            <p>Please fill in this form to edit data.</p>
+            <p style="color:red"> <%= err %> </p>
+            <hr>
+        
+            <label><b>ID</b></label>
+            <input type="text" value="<%= student.id %>" name="id" required>
+            <br>
+            <label><b>First Name</b></label>
+            <input type="text" value="<%= student.first_name %>" name="first_name" required>
+            <br>
+            <label><b>Last Name</b></label>
+            <input type="text" value="<%= student.last_name %>" name="last_name" required>
+            <br>
+            <label><b>Email</b></label>
+            <input type="text" value="<%= student.email %>" name="email" required>
+            <hr>
+            <button type="submit" class="registerbtn">Submit</button>
+        </div>
+    </form>    
+</body>
+</html>

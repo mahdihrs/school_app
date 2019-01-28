@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Add Teacher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1 style="text-align: center">Add Teachers Data</h1>
+    <h5 style="text-align: center"><a href="/teachers">show all data</a></h5>
+    <form action="/teachers/add" method="POST">
+        <div class="container">
+            <p>Please fill in this form to create an account.</p>
+            <% if(err) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= err %>
+                </div>
+            <% } %>
+            <h5 style="color: green"> <%= success %> </h5>
+            <hr>
+            <br>
+            <label><b>First Name</b></label>
+            <input type="text" placeholder="Enter first name" name="first_name" required>
+            <br>
+            <label><b>Last Name</b></label>
+            <input type="text" placeholder="Enter last name" name="last_name" required>
+            <br>
+            <label><b>Email</b></label>
+            <input type="text" placeholder="Enter email" name="email" required>
+            <br>
+            <hr>
+            <button type="submit">Add Teacher</button>
+        </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
