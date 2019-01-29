@@ -1,8 +1,7 @@
 'use strict';
-const bcrypt = require('bcryptjs');
 const generateHash = require('../helpers/generateHash')
+const generateHashBcrypt = require('../helpers/generateHashBcrypt')
 module.exports = (sequelize, DataTypes) => {
-  // const saltRounds = 10;
   const User = sequelize.define('User', {
     name: DataTypes.STRING,
     email: {
@@ -28,17 +27,14 @@ module.exports = (sequelize, DataTypes) => {
 
 //BCRYPT
   User.beforeCreate((user, options) => {
-    user.password = `hacktiv8${user.name}`
-    return bcrypt.genSalt(10)
-      .then((salt) => {
-        return bcrypt.hash(user.password, salt)
-      })
-      .then(hash => {
+    let password = `hacktiv8${user.name}`
+    return generateHashBcrypt(password)
+    .then(hash => {
         user.password = hash
-      })
-      .catch(err => {
+    })
+    .catch(err => {
         throw err
-      })
+    })
   });
 
   User.associate = function (models) {
