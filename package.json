@@ -19,6 +19,7 @@
   "homepage": "https://github.com/active-fox-2018/express-sequelize-crud#readme",
   "dependencies": {
     "bcrypt": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "pg": "^7.8.0",

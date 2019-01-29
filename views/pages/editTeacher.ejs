@@ -9,9 +9,11 @@
     <script src="main.js"></script>
 </head>
 <body>  
+    <%- include('../partials/navbar') %>
+    <br>
     <h1 style="text-align: center">Edit Teacher's Data</h1>
     <h5 style="text-align: center"><a href="/teachers">show all data</a></h5>
-    <form action="/teachers/edit/<%= teacher.id %>" method="POST">
+    <form action="/teachers/edit/<%=teacher.id%>" method="POST">
         <div class="container">
             <p>Please fill in this form to edit data.</p>
             <hr>
@@ -26,7 +28,17 @@
             <input type="text" value="<%= teacher.email %>" name="email" required>
             <br>
             <label><b>SubjectId</b></label>
-            <input type="text" value="<%= teacher.SubjectId %>" name="SubjectId" required>
+            <select name="subject">
+                <% subjects.forEach(s => { %>
+                    <% if(!teacher.SubjectId) { %>
+                        <option selected> SELECT </option>
+                        <% } else if(teacher.SubjectId === s.id) { %>
+                        <option value="<%= s.id %>" selected> <%= s.subject_name %> </option>
+                        <% } else { %>
+                        <option value="<%= s.id %>"> <%= s.subject_name %> </option>
+                        <% } %>
+                    <% }) %>
+                </select>
             <br>
             <hr>
             <button type="submit" class="registerbtn">Submit</button>

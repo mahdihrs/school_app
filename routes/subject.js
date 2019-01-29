@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const models = require('../models')
 const Subject = require('../models').Subject
+const scoreByLetter = require('../helpers/convertScore')
+
 
 router.get('/', (req, res) => {
     Subject.findAll({
@@ -23,7 +25,7 @@ router.get('/', (req, res) => {
         return Promise.all(teachersIncluded)
     })
     .then(data => {
-        res.render('allSubjects', { 
+        res.render('pages/allSubjects', { 
             subjects: data
         })
 
@@ -34,7 +36,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/add', (req, res) => {
-    res.render('subjectForms')
+    res.render('pages/subjectForms')
 })
 
 router.post('/add', (req, res) => {
@@ -56,7 +58,7 @@ router.get('/edit/:id', (req, res) => {
         if (!subject) {
             throw `Subject tidak tersedia`
         }
-        res.render('editSubject', { subject: subject })
+        res.render('pages/editSubject', { subject: subject })
     })
     .catch(err => {
         res.send(err)
@@ -95,7 +97,10 @@ router.get('/:id/enrolled-students', (req, res) => {
     .then(students => {
         sub.dataValues['Students'] = students
         // res.send(sub)
-        res.render('enrolledStudents', { subject: sub })
+        res.render('pages/enrolledStudents', { 
+            subject: sub,
+            scoreByLetter: scoreByLetter
+        })
     })
     .catch(err => {
         res.send(err)
@@ -111,7 +116,7 @@ router.get('/:id/give-score', (req, res) => {
     })
     .then(student => {
         let fullName = `${student.first_name} ${student.last_name}`
-        res.render('give-score', { 
+        res.render('pages/give-score', { 
             name: fullName,
             data: StuSub
         })

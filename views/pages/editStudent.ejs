@@ -9,6 +9,8 @@
     <script src="main.js"></script>
 </head>
 <body>  
+    <%- include('../partials/navbar') %>
+    <br>
     <h1 style="text-align: center">Edit Students Data</h1>
     <h5 style="text-align: center"><a href="/students">show all data</a></h5>
     <form action="/students/edit/<%= student.id %>" method="POST">

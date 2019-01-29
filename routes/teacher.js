@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         ]
     })
     .then(allTeachers => {
-        res.render('allTeachers', { 
+        res.render('pages/allTeachers', { 
             teachers: allTeachers
         })
     })
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/add', (req, res) => {
-    res.render('teacherForms', {
+    res.render('pages/teacherForms', {
         err: req.query.error,
         success: req.query.success
     })
@@ -35,7 +35,6 @@ router.post('/add', (req, res) => {
     })
     .then(newData => {
         res.redirect('/teachers')
-        // res.redirect(`/teachers/add?success=${first_name} has been added as a Teacher`)
     })
     .catch(err => {
         res.redirect(`/teachers/add?error=${err.errors[0].message}`)
@@ -44,12 +43,22 @@ router.post('/add', (req, res) => {
 
 router.get('/edit/:id', (req, res) => {
     let id = req.params.id
-    Teacher.findByPk(id)
+    let subjects;
+    models.Subject.findAll()
+    .then(allSubjects => {
+        subjects = allSubjects
+        // res.send(subjects)
+        return Teacher.findByPk(id)
+    })
     .then(teacher => {
+        // res.send(teacher)
         if (!teacher) {
             throw `Data guru tidak tersedia`
         }
-        res.render('editTeacher', { teacher: teacher })
+        res.render('pages/editTeacher', { 
+            teacher: teacher,
+            subjects: subjects 
+        })
     })
     .catch(err => {
         res.send(err)
@@ -62,8 +71,9 @@ router.post('/edit/:id', (req, res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,
-        SubjectId: req.body.SubjectId
+        SubjectId: req.body.subject
     }
+    // console.log(req.body)
     Teacher.update(sendToValidate, {where: {id: req.params.id}})
     .then(() => {
         res.redirect('/teachers')

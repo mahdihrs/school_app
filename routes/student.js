@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
         order: [['id', 'ASC']]
     })
     .then(allStudents => {
-        res.render('allStudents', { 
+        res.render('pages/allStudents', { 
             students: allStudents
         })
     })
@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 router.get('/add', (req, res) => {
     let successMsg = req.query.success
-    res.render('studentForms', { 
+    res.render('pages/studentForms', { 
         err: req.query.error,
         msg: successMsg
     })
@@ -44,7 +44,7 @@ router.get('/edit/:id', (req, res) => {
     let id = req.params.id
     Student.findByPk(id)
     .then(student => {
-        res.render('editStudent', {
+        res.render('pages/editStudent', {
             student: student, 
             err: req.query.error
         })
@@ -82,7 +82,7 @@ router.get('/:id/add-subject', (req, res) => {
         return models.Subject.findAll()
     })
     .then(allSubjects => {
-        res.render('addSubject', {
+        res.render('pages/addSubject', {
             student: student,
             subjects: allSubjects
         })
